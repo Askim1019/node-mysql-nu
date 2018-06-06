@@ -1,0 +1,24 @@
+{
+  "name": "mysql-nu",
+  "version": "1.0.0",
+  "description": "Amazon like store front CLI app",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Askim1019/node-mysql-nu.git"
+  },
+  "author": "Alex Kim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Askim1019/node-mysql-nu/issues"
+  },
+  "homepage": "https://github.com/Askim1019/node-mysql-nu#readme",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "inquirer": "^6.0.0",
+    "mysql": "^2.15.0"
+  }
+}
