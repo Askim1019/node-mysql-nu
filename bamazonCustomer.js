@@ -11,22 +11,5 @@ const config = {
     database: 'bamazon'
 }
 
+// This establishes the connection and does the querying for us. Connection.connect only used to check connection
 const connection = mysql.createConnection(config);
-
-let sqlCommand = 'SELECT * FROM products';
-
-connection.connect(function(err){
-    if (err) {
-        console.error('connection.js: ', err);
-    }
-
-    console.log('connected to mysql! ' + config.database, connection.threadId);
-
-    connection.query(sqlCommand, function(err, response) {
-        if (err) { console.lerror('connection.js: ', err);}
-
-        console.log('response: ', response);
-    })
-
-    connection.end();
-});
