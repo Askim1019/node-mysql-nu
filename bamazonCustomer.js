@@ -126,3 +126,4 @@ function fulfillOrder(product, stock_quantity, chosenQuantity) {
 }
 
 // Possibly add a recursive call or a function to see if the customer wants to order anything else. If so, then just run the initializing function again within the last function call
+

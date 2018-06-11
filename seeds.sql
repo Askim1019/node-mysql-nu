@@ -10,4 +10,4 @@ VALUES
     (7, "jeans", "clothes", 50.00, 5),
     (8, "baseball", "sports", 10.00, 11),
     (9, "football", "sports", 15.00, 7),
-    (10, "asus", "laptop", 1100.00,);
+    (10, "asus", "laptop", 1100.00, 4);
