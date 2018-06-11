@@ -56,9 +56,11 @@ function selectProduct() {
             connection.query(sqlCommand, [product_data], (err, res) => {
                 chosenProduct = res[0];
 
-                console.log(`----------------------------`);
-                console.log(`\nProduct chosen: ${chosenProduct.product_name}\n`);
-                console.log(`----------------------------`);
+                console.log(`\n----------------------------`);
+                console.log(`Product chosen: ${chosenProduct.product_name}\n`);
+                console.log(`Product price: ${chosenProduct.price}\n`);
+                console.log(`Product quantity remaining: ${chosenProduct.stock_quantity}`);
+                console.log(`----------------------------\n`);
 
                 selectQuantity(chosenProduct);
             });
@@ -76,8 +78,8 @@ function selectQuantity(chosenProduct) {
         .then(function(answer){
             chosenQuantity = parseInt(answer.quantity);
 
-            console.log(`----------------------------`);
-            console.log(`\nQuantity chosen: ${chosenQuantity}\n`);
+            console.log(`\n----------------------------`);
+            console.log(`Quantity chosen: ${chosenQuantity}`);
             console.log(`----------------------------`);
 
             if (Number.isInteger(chosenQuantity) === false) {
@@ -98,16 +100,16 @@ function checkQuantity(chosenProduct, chosenQuantity) {
         stock_quantity = (chosenProduct.stock_quantity - chosenQuantity);
         totalPrice = (chosenQuantity * chosenProduct.price);
 
-        console.log(`----------------------------`);
-        console.log(`Your total is: $${totalPrice}\n`);
-        console.log(`----------------------------`);
+        console.log(`\n----------------------------`);
+        console.log(`Your total is: $${totalPrice}`);
+        console.log(`----------------------------\n`);
 
-        fulfillOrder(chosenProduct.product_name, stock_quantity);
+        fulfillOrder(chosenProduct, stock_quantity, chosenQuantity);
         
     }
 }
 
-function fulfillOrder(product, stock_quantity) {
+function fulfillOrder(product, stock_quantity, chosenQuantity) {
     console.log("fulfilling order...\n");
 
     sqlCommand = `UPDATE products SET stock_quantity = ? WHERE product_name = ?`;
@@ -115,6 +117,12 @@ function fulfillOrder(product, stock_quantity) {
     connection.query(sqlCommand, [stock_quantity, product.product_name], (err, res) => {
         if (err) throw err;
 
-        console.log(res);
+        console.log(`YOUR RECEIPT\n\n${chosenQuantity} ${product.product_name} are ordered.\nThank you for your order!`);
+        console.log(`\n----------------------------`);
+        console.log(`There are ${product.stock_quantity} remaining in the inventory`);
+        console.log(`----------------------------\n`);
+        connection.end();
     });
 }
+
+// Possibly add a recursive call or a function to see if the customer wants to order anything else. If so, then just run the initializing function again within the last function call
