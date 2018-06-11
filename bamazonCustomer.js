@@ -78,15 +78,18 @@ function selectQuantity(chosenProduct) {
         .then(function(answer){
             chosenQuantity = parseInt(answer.quantity);
 
+            if (Number.isInteger(chosenQuantity) === false) {
+                console.log("value is not an integer please restart");
+
+                return selectProduct();
+                connection.end();
+            }
+
+
             console.log(`\n----------------------------`);
             console.log(`Quantity chosen: ${chosenQuantity}`);
             console.log(`----------------------------`);
-
-            if (Number.isInteger(chosenQuantity) === false) {
-                console.log("\nPlease provide a valid integer\n");
-                selectQuantity(chosenProduct);
-            }
-
+            
             checkQuantity(chosenProduct, chosenQuantity);
         });
 }
